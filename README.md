@@ -19,7 +19,7 @@
   
 1. 封装思路
 
-  以往我们使用Alamofire 直接发起请求会调用Alamofire.swift 中的方法： 
+  使用Alamofire 直接发起请求会调用Alamofire.swift 中的方法： 
      
      // MARK: - Data Request
       /// Creates a `DataRequest` using the default `SessionManager` to retrieve the contents of the specified `url`,

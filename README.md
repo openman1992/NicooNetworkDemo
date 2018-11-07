@@ -161,6 +161,47 @@
          将数据解析成BookList的Model对象。
         4.创建Model. 
         解析方式可以自行选择。 Demo中使用苹果自带的解析： Codable
+        
+       另外还有一个服务的配置： 
+       在AppDelegate中添加服务：
+          
+         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: 
+           [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+                // service 配置
+                NicooServiceFactory.shareInstance.dataSource = self
+        
+       
+                return true
+          }
+          
+       实现代理：
+   
+         // MARK: - TZServiceFactoryProtocol
+        
+  
+         extension AppDelegate: NicooServiceFactoryProtocol {
+    
+             /// 自定义的服务
+              ///
+              /// - Returns: 自定义的服务名
+           func servicesKindsOfServiceFactory() -> [String : String] {
+                return [ConstValue.kYTSGService: "YTSGService"]
+           }
+    
+              /// 自定义的服务所在的命名空间 （如果自定义的服务是组件，命名空间就为 服务组件名）
+              ///
+              /// - Parameter service: 服务名
+              /// - Returns: m命名空间
+          func namespaceForService(_ service: String) -> String? {
+              switch service {
+                   case ConstValue.kYTSGService:
+                   return "NicooNetwork_Example"   // 这里可能会由于NicooNetwork-Example 中的 特殊符号导致找不到Servicee的命名空间
+                 default:
+                   return nil
+          }
+        }
+  
+        }
        
     
          
